@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rhea Ravindra — Work Samples</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#000000;
+    --ink-soft:#333333;
+    --grey:#555555;
+    --line:#cfcfcf;
+    --line-soft:#e6e6e6;
+    --paper:#ffffff;
+    --link:#3f6f8f;
+    --maxw:1000px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--paper);color:var(--ink);
+    font-family:'EB Garamond',Garamond,Georgia,serif;
+    font-size:18px;line-height:1.6;-webkit-font-smoothing:antialiased;
+  }
+  header.masthead{
+    max-width:var(--maxw);margin:0 auto;
+    padding:60px 40px 26px;text-align:center;
+    border-bottom:1px solid var(--ink);
+  }
+  h1.name{
+    font-family:'EB Garamond',Garamond,serif;font-weight:400;
+    font-size:clamp(40px,7vw,68px);letter-spacing:0.22em;
+    text-transform:uppercase;line-height:1;margin-right:-0.22em;
+  }
+  .contactline{margin-top:18px;font-size:16px;color:var(--ink-soft);letter-spacing:0.01em;}
+  .contactline a{color:var(--link);text-decoration:none;border-bottom:1px solid transparent;transition:border-color .2s;}
+  .contactline a:hover{border-color:var(--link);}
+  .sep{color:var(--grey);margin:0 10px;}
+  .intro{max-width:var(--maxw);margin:0 auto;padding:22px 40px 8px;font-size:18px;text-align:justify;}
+  nav.cats{position:sticky;top:0;z-index:20;background:rgba(255,255,255,0.94);backdrop-filter:blur(8px);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  nav.cats .inner{max-width:var(--maxw);margin:0 auto;padding:13px 40px;display:flex;gap:34px;flex-wrap:wrap;align-items:baseline;}
+  nav.cats a{font-family:'Jost','Gill Sans MT',sans-serif;font-weight:400;font-size:13px;letter-spacing:0.18em;text-transform:uppercase;color:var(--grey);text-decoration:none;transition:color .2s;}
+  nav.cats a:hover,nav.cats a.active{color:var(--ink);}
+  nav.cats .count{font-size:10px;vertical-align:super;margin-left:3px;color:var(--grey);}
+  main{max-width:var(--maxw);margin:0 auto;padding:0 40px;}
+  section.category{padding:44px 0 14px;}
+  .cat-title{font-family:'Jost','Gill Sans MT',sans-serif;font-weight:400;font-size:clamp(22px,3.4vw,30px);letter-spacing:0.16em;text-transform:uppercase;display:inline-block;padding-bottom:7px;border-bottom:1px solid var(--ink);margin-bottom:6px;}
+  .cat-num{font-family:'Jost',sans-serif;font-size:13px;letter-spacing:0.1em;color:var(--grey);margin-right:14px;}
+  .cat-desc{color:var(--grey);font-size:17px;font-style:italic;max-width:580px;margin:8px 0 22px;}
+  .sample{border-top:1px solid var(--line);}
+  .sample:last-child{border-bottom:1px solid var(--line);}
+  .sample-head{display:flex;align-items:flex-start;gap:22px;padding:18px 4px;cursor:pointer;user-select:none;}
+  .sample:hover .sample-title{text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px;}
+  .sample-meta{flex:1;}
+  .sample-tag{font-family:'Jost','Gill Sans MT',sans-serif;font-size:11.5px;letter-spacing:0.16em;text-transform:uppercase;color:var(--grey);margin-bottom:9px;display:flex;gap:16px;flex-wrap:wrap;}
+  .sample-tag .date{color:var(--ink-soft);}
+  h3.sample-title{font-family:'EB Garamond',Garamond,serif;font-weight:600;font-size:23px;line-height:1.25;margin-bottom:5px;}
+  .sample-sub{color:var(--grey);font-size:16px;}
+  .toggle{flex-shrink:0;width:34px;height:34px;border:1px solid var(--line);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:background .25s,border-color .25s,transform .35s;margin-top:6px;}
+  .toggle svg{width:15px;height:15px;stroke:var(--ink);transition:stroke .25s;}
+  .sample.open .toggle{background:var(--ink);border-color:var(--ink);transform:rotate(180deg);}
+  .sample.open .toggle svg{stroke:#fff;}
+  .sample-body{max-height:0;overflow:hidden;transition:max-height .5s cubic-bezier(.4,0,.2,1);}
+  .sample-body-inner{padding:6px 4px 28px;}
+  .pdf-frame{
+    width:100%;
+    height:80vh;
+    border:1px solid var(--line);
+    background:#e9e9e9;
+    overflow-y:auto;
+    overflow-x:hidden;
+    padding:16px 0;
+    -webkit-overflow-scrolling:touch;
+  }
+  .pdf-frame canvas{
+    display:block;
+    margin:0 auto 14px;
+    max-width:96%;
+    height:auto;
+    box-shadow:0 1px 6px rgba(0,0,0,0.18);
+    background:#fff;
+  }
+  .pdf-frame .pdf-loading{
+    font-family:'Jost','Gill Sans MT',sans-serif;
+    font-size:12.5px;letter-spacing:0.08em;text-transform:uppercase;
+    color:var(--grey);text-align:center;padding:40px 0;
+  }
+  .pdf-open{
+    display:inline-block;margin-top:14px;
+    font-family:'Jost','Gill Sans MT',sans-serif;
+    font-size:12.5px;letter-spacing:0.1em;text-transform:uppercase;
+    color:var(--ink);text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:2px;
+    transition:border-color .2s;
+  }
+  .pdf-open:hover{border-color:var(--ink);}
+  .doc{max-width:660px;margin:14px auto 0;}
+  .doc .docnote{font-family:'Jost','Gill Sans MT',sans-serif;font-size:11.5px;letter-spacing:0.12em;text-transform:uppercase;color:var(--grey);padding-bottom:16px;margin-bottom:22px;border-bottom:1px solid var(--line-soft);}
+  .doc h4{font-family:'EB Garamond',serif;font-weight:600;font-size:21px;margin:26px 0 6px;}
+  .doc h5{font-family:'Jost','Gill Sans MT',sans-serif;font-weight:500;font-size:12.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink);margin:26px 0 9px;}
+  .doc p{margin-bottom:14px;}
+  .doc ul{margin:0 0 16px 22px;}
+  .doc li{margin-bottom:8px;}
+  .doc .bottomline{border-left:2px solid var(--ink);padding:6px 0 6px 20px;margin:18px 0 24px;font-style:italic;color:var(--ink-soft);}
+  .doc .kv{border-top:1px solid var(--line-soft);padding:9px 0;display:grid;grid-template-columns:190px 1fr;gap:18px;font-size:16.5px;}
+  .doc .kv span:first-child{color:var(--grey);font-family:'Jost',sans-serif;font-size:12.5px;letter-spacing:0.04em;text-transform:uppercase;padding-top:3px;}
+  .doc .reader-meta{display:flex;gap:26px;flex-wrap:wrap;font-family:'Jost',sans-serif;font-size:12.5px;letter-spacing:0.03em;color:var(--grey);margin-bottom:20px;text-transform:uppercase;}
+  .doc .reader-meta b{color:var(--ink);font-weight:500;}
+  .risk-flag{font-family:'Jost',sans-serif;font-size:10.5px;letter-spacing:0.08em;padding:2px 9px;margin-left:6px;border:1px solid var(--ink);text-transform:uppercase;white-space:nowrap;}
+  .r-high{background:var(--ink);color:#fff;}
+  .r-med{background:#fff;color:var(--ink);}
+  .r-low{background:#fff;color:var(--grey);border-color:var(--line);}
+  .empty{border:1px dashed var(--line);padding:36px 30px;text-align:center;color:var(--grey);font-style:italic;}
+  footer{max-width:var(--maxw);margin:30px auto 0;padding:36px 40px 60px;border-top:1px solid var(--ink);font-family:'Jost',sans-serif;font-size:12.5px;letter-spacing:0.06em;color:var(--grey);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;text-transform:uppercase;}
+  footer a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--line);}
+  @media(max-width:640px){
+    header.masthead{padding:54px 22px 28px;}
+    .intro{padding:24px 22px 8px;text-align:left;}
+    main{padding:0 22px;}
+    nav.cats .inner{padding:12px 22px;gap:22px;}
+    .doc .kv{grid-template-columns:1fr;gap:2px;}
+    .contactline{font-size:14px;}
+  }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <h1 class="name">Rhea Ravindra</h1>
+  <div class="contactline">
+    <a href="mailto:rhea.ravindra@sciencespo.fr">rhea.ravindra@sciencespo.fr</a>
+    <span class="sep">|</span>
+    <a href="https://www.linkedin.com/in/rhea-ravindra" target="_blank" rel="noopener">linkedin.com/in/rhea-ravindra</a>
+    <span class="sep">|</span>
+    <span>Paris, France</span>
+  </div>
+</header>
+
+<p class="intro">A selection of written work in political and geopolitical risk — country briefings, policy memos, and route risk analyses, with a focus on EU–Asia-Pacific relations. Each piece can be read in full below.</p>
+
+<nav class="cats">
+  <div class="inner">
+    <a href="#risk" class="active">Risk Analyses<span class="count">5</span></a>
+    <a href="#memos">Memos &amp; Briefs<span class="count">3</span></a>
+    <a href="#research">Academic Research<span class="count">3</span></a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- ============ RISK ANALYSES ============ -->
+  <section class="category" id="risk">
+    <div><span class="cat-num">01</span><h2 class="cat-title">Risk Analyses</h2></div>
+    <p class="cat-desc">Operational and route-level assessments weighing threat likelihood against potential impact.</p>
+
+    <!-- LNG Squirtle -->
+    <article class="sample">
+      <div class="sample-head">
+        <div class="sample-meta">
+          <div class="sample-tag"><span>Route Risk Analysis</span><span class="date">25 April 2026</span></div>
+          <h3 class="sample-title">LNG <i>Squirtle</i> — Strait of Hormuz Route Risk Analysis</h3>
+          <p class="sample-sub">Threat-actor and route-segment assessment for a French-flagged LNG carrier during the 2026 Iran war.</p>
+        </div>
+        <div class="toggle"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+      </div>
+      <div class="sample-body">
+                <div class="sample-body-inner">
+          <div class="pdf-frame">
+            <div class="pdf-render" data-pdf="pdfs/lng-squirtle-route-risk-analysis.pdf"><div class="pdf-loading">Loading document…</div></div>
+          </div>
+          <a class="pdf-open" href="pdfs/lng-squirtle-route-risk-analysis.pdf" target="_blank" rel="noopener">Open full PDF in a new tab &#8599;</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- TRISEC voyage -->
+    <article class="sample landscape">
+      <div class="sample-head">
+        <div class="sample-meta">
+          <div class="sample-tag"><span>Voyage Risk Assessment</span><span class="date">2026</span></div>
+          <h3 class="sample-title">MT <i>Lima 9</i> — Voyage Risk Assessment</h3>
+          <p class="sample-sub">Full voyage assessment for an Aframax crude tanker: Puerto José, Venezuela to Dos Bocas, Mexico.</p>
+        </div>
+        <div class="toggle"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+      </div>
+      <div class="sample-body">
+                <div class="sample-body-inner">
+          <div class="pdf-frame">
+            <div class="pdf-render" data-pdf="pdfs/trisec-voyage-risk-assessment.pdf"><div class="pdf-loading">Loading document…</div></div>
+          </div>
+          <a class="pdf-open" href="pdfs/trisec-voyage-risk-assessment.pdf" target="_blank" rel="noopener">Open full PDF in a new tab &#8599;</a>
+        </div>
+      </div>
+      </div>
+    </article>
+
+    <article class="sample">
+      <div class="sample-head">
+        <div class="sample-meta">
+          <div class="sample-tag"><span>Political Risk Analysis</span><span class="date">2024</span></div>
+          <h3 class="sample-title">Chinese Invasion of Taiwan — Political Risk Analysis</h3>
+          <p class="sample-sub">A weighted risk index assessing the probability of a Chinese invasion of Taiwan by 2027, for EU companies invested in Taiwan.</p>
+        </div>
+        <div class="toggle"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+      </div>
+      <div class="sample-body">
+        <div class="sample-body-inner">
+          <div class="pdf-frame">
+            <div class="pdf-render" data-pdf="pdfs/taiwan-invasion-political-risk-analysis.pdf"><div class="pdf-loading">Loading document…</div></div>
+          </div>
+          <a class="pdf-open" href="pdfs/taiwan-invasion-political-risk-analysis.pdf" target="_blank" rel="noopener">Open full PDF in a new tab &#8599;</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="sample">
+      <div class="sample-head">
+        <div class="sample-meta">
+          <div class="sample-tag"><span>Threat Assessment</span><span class="date">2024</span></div>
+          <h3 class="sample-title">Houthi Actions in the Red Sea — Private Sector Threat Assessment</h3>
+          <p class="sample-sub">Threat assessment of Houthi attacks on commercial shipping in the Red Sea, with analysis of tactics and business impact.</p>
+        </div>
+        <div class="toggle"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+      </div>
+      <div class="sample-body">
+        <div class="sample-body-inner">
+          <div class="pdf-frame">
+            <div class="pdf-render" data-pdf="pdfs/houthi-red-sea-threat-assessment.pdf"><div class="pdf-loading">Loading document…</div></div>
+          </div>
+          <a class="pdf-open" href="pdfs/houthi-red-sea-threat-assessment.pdf" target="_blank" rel="noopener">Open full PDF in a new tab &#8599;</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="sample landscape">
+      <div class="sample-head">
+        <div class="sample-meta">
+          <div class="sample-tag"><span>State of Security Report · Co-authored</span><span class="date">2024</span></div>
+          <h3 class="sample-title">Andean Region — State of Security Report</h3>
+          <p class="sample-sub">Security assessment of Bolivia, Ecuador, Peru and Chile for a mining-sector client, with country risk profiles and mitigation strategies.</p>
+        </div>
+        <div class="toggle"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+      </div>
+      <div class="sample-body">
+        <div class="sample-body-inner">
+          <div class="pdf-frame">
+            <div class="pdf-render" data-pdf="pdfs/andean-state-of-security-report.pdf"><div class="pdf-loading">Loading document…</div></div>
+          </div>
+          <a class="pdf-open" href="pdfs/andean-state-of-security-report.pdf" target="_blank" rel="noopener">Open full PDF in a new tab &#8599;</a>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <!-- ============ MEMOS & BRIEFS ============ -->
+  <section class="category" id="memos">
+    <div><span class="cat-num">02</span><h2 class="cat-title">Memos &amp; Briefs</h2></div>
+    <p class="cat-desc">Concise decision-oriented documents: country briefings and policy memos prepared for senior readers.</p>
+
+    <!-- Australia briefing -->
+    <article class="sample">
+      <div class="sample-head">
+        <div class="sample-meta">
+          <div class="sample-tag"><span>Country Briefing</span><span class="date">2026</span></div>
+          <h3 class="sample-title">Australia – EU Relations: Country Briefing</h3>
+          <p class="sample-sub">EEAS-style briefing on the state of the bilateral relationship after the March 2026 SDP and FTA breakthroughs.</p>
+        </div>
+        <div class="toggle"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+      </div>
+      <div class="sample-body">
+                <div class="sample-body-inner">
+          <div class="pdf-frame">
+            <div class="pdf-render" data-pdf="pdfs/australia-eu-country-briefing.pdf"><div class="pdf-loading">Loading document…</div></div>
+          </div>
+          <a class="pdf-open" href="pdfs/australia-eu-country-briefing.pdf" target="_blank" rel="noopener">Open full PDF in a new tab &#8599;</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- EU Global Actor memo -->
+    <article class="sample">
+      <div class="sample-head">
+        <div class="sample-meta">
+          <div class="sample-tag"><span>Policy Memo</span><span class="date">29 March 2026</span></div>
+          <h3 class="sample-title">Can the EU Become a Global Actor? Critical Raw Materials &amp; Africa</h3>
+          <p class="sample-sub">Strategic-advisor memo to the President of the European Commission, ahead of the EU–African Union Summit.</p>
+        </div>
+        <div class="toggle"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+      </div>
+      <div class="sample-body">
+                <div class="sample-body-inner">
+          <div class="pdf-frame">
+            <div class="pdf-render" data-pdf="pdfs/eu-global-actor-crm-memo.pdf"><div class="pdf-loading">Loading document…</div></div>
+          </div>
+          <a class="pdf-open" href="pdfs/eu-global-actor-crm-memo.pdf" target="_blank" rel="noopener">Open full PDF in a new tab &#8599;</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- India-EU briefing -->
+    <article class="sample">
+      <div class="sample-head">
+        <div class="sample-meta">
+          <div class="sample-tag"><span>Policy Briefing · Co-authored</span><span class="date">2026</span></div>
+          <h3 class="sample-title">EU–India: Strengthening Mutual Relations</h3>
+          <p class="sample-sub">Briefing on shared and divergent interests following the January 2026 EU–India FTA and Security &amp; Defence Partnership.</p>
+        </div>
+        <div class="toggle"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+      </div>
+      <div class="sample-body">
+                <div class="sample-body-inner">
+          <div class="pdf-frame">
+            <div class="pdf-render" data-pdf="pdfs/eu-india-policy-briefing.pdf"><div class="pdf-loading">Loading document…</div></div>
+          </div>
+          <a class="pdf-open" href="pdfs/eu-india-policy-briefing.pdf" target="_blank" rel="noopener">Open full PDF in a new tab &#8599;</a>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <!-- ============ ACADEMIC RESEARCH ============ -->
+  <section class="category" id="research">
+    <div><span class="cat-num">03</span><h2 class="cat-title">Academic Research</h2></div>
+    <p class="cat-desc">Longer-form research and analytical writing on international relations and Chinese politics.</p>
+
+    <article class="sample">
+      <div class="sample-head">
+        <div class="sample-meta">
+          <div class="sample-tag"><span>Research Paper</span><span class="date">Sciences Po</span></div>
+          <h3 class="sample-title">Sino-European Relations in the Liberal International Order</h3>
+          <p class="sample-sub">A historical analysis of how the liberal international order has shaped EU–China relations, closing with policy recommendations for the EU.</p>
+        </div>
+        <div class="toggle"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+      </div>
+      <div class="sample-body">
+        <div class="sample-body-inner">
+          <div class="pdf-frame">
+            <div class="pdf-render" data-pdf="pdfs/sino-european-relations.pdf"><div class="pdf-loading">Loading document…</div></div>
+          </div>
+          <a class="pdf-open" href="pdfs/sino-european-relations.pdf" target="_blank" rel="noopener">Open full PDF in a new tab &#8599;</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="sample">
+      <div class="sample-head">
+        <div class="sample-meta">
+          <div class="sample-tag"><span>Research Paper</span><span class="date">2022</span></div>
+          <h3 class="sample-title">The Role of Soft Power in Regional Diplomacy</h3>
+          <p class="sample-sub">A case study comparing Chinese and Japanese soft-power strategies in Southeast Asia, drawing on Nye's and Ohnesorge's frameworks.</p>
+        </div>
+        <div class="toggle"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+      </div>
+      <div class="sample-body">
+        <div class="sample-body-inner">
+          <div class="pdf-frame">
+            <div class="pdf-render" data-pdf="pdfs/soft-power-southeast-asia.pdf"><div class="pdf-loading">Loading document…</div></div>
+          </div>
+          <a class="pdf-open" href="pdfs/soft-power-southeast-asia.pdf" target="_blank" rel="noopener">Open full PDF in a new tab &#8599;</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="sample">
+      <div class="sample-head">
+        <div class="sample-meta">
+          <div class="sample-tag"><span>Research Paper</span><span class="date">Sciences Po</span></div>
+          <h3 class="sample-title">The Chinese Middle Class &amp; Norm Development</h3>
+          <p class="sample-sub">An examination of how China's middle class shapes contemporary norms in consumerism, governance and social change since 1978.</p>
+        </div>
+        <div class="toggle"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+      </div>
+      <div class="sample-body">
+        <div class="sample-body-inner">
+          <div class="pdf-frame">
+            <div class="pdf-render" data-pdf="pdfs/chinese-middle-class.pdf"><div class="pdf-loading">Loading document…</div></div>
+          </div>
+          <a class="pdf-open" href="pdfs/chinese-middle-class.pdf" target="_blank" rel="noopener">Open full PDF in a new tab &#8599;</a>
+        </div>
+      </div>
+    </article>
+  </section>
+
+</main>
+
+<footer>
+  <span>© 2026 Rhea Ravindra · Work Samples</span>
+  <span><a href="mailto:rhea.ravindra@sciencespo.fr">Get in touch →</a></span>
+</footer>
+
+<script>
+  // accordion
+  document.querySelectorAll('.sample-head').forEach(head=>{
+    head.addEventListener('click',()=>{
+      const card=head.closest('.sample');
+      const body=card.querySelector('.sample-body');
+      const isOpen=card.classList.contains('open');
+      if(isOpen){
+        body.style.maxHeight='0px';
+        card.classList.remove('open');
+      }else{
+        card.classList.add('open');
+        body.style.maxHeight=body.scrollHeight+'px';
+      }
+    });
+  });
+  // recompute height on resize for open cards
+  window.addEventListener('resize',()=>{
+    document.querySelectorAll('.sample.open .sample-body').forEach(b=>{
+      b.style.maxHeight=b.scrollHeight+'px';
+    });
+  });
+  // nav active state on scroll
+  const sections=[...document.querySelectorAll('section.category')];
+  const links=[...document.querySelectorAll('nav.cats a')];
+  window.addEventListener('scroll',()=>{
+    let cur=sections[0].id;
+    sections.forEach(s=>{ if(window.scrollY>=s.offsetTop-120) cur=s.id; });
+    links.forEach(l=>l.classList.toggle('active',l.getAttribute('href')==='#'+cur));
+  });
+
+  // ---- PDF.js inline rendering (all pages stacked, scrollable) ----
+  const PDFJS_SRC='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js';
+  const PDFJS_WORKER='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+  let pdfjsReady=null;
+  function loadPdfJs(){
+    if(pdfjsReady) return pdfjsReady;
+    pdfjsReady=new Promise((resolve,reject)=>{
+      const sc=document.createElement('script');
+      sc.src=PDFJS_SRC;
+      sc.onload=()=>{ window['pdfjsLib'].GlobalWorkerOptions.workerSrc=PDFJS_WORKER; resolve(window['pdfjsLib']); };
+      sc.onerror=reject;
+      document.head.appendChild(sc);
+    });
+    return pdfjsReady;
+  }
+
+  function recomputeOpenHeights(){
+    document.querySelectorAll('.sample.open .sample-body').forEach(b=>{
+      b.style.maxHeight=b.scrollHeight+'px';
+    });
+  }
+
+  async function renderPdf(container){
+    if(container.dataset.rendered) return;
+    container.dataset.rendered='1';
+    const url=container.getAttribute('data-pdf');
+    try{
+      const pdfjsLib=await loadPdfJs();
+      const pdf=await pdfjsLib.getDocument(url).promise;
+      container.innerHTML='';
+      // render width based on the container's inner width, capped for sharpness
+      const targetW=Math.min(container.clientWidth*0.96, 900);
+      for(let p=1;p<=pdf.numPages;p++){
+        const page=await pdf.getPage(p);
+        const unscaled=page.getViewport({scale:1});
+        const scale=targetW/unscaled.width;
+        const viewport=page.getViewport({scale:scale*(window.devicePixelRatio||1)});
+        const canvas=document.createElement('canvas');
+        const ctx=canvas.getContext('2d');
+        canvas.width=viewport.width;
+        canvas.height=viewport.height;
+        canvas.style.width=(viewport.width/(window.devicePixelRatio||1))+'px';
+        container.appendChild(canvas);
+        await page.render({canvasContext:ctx,viewport:viewport}).promise;
+        recomputeOpenHeights();
+      }
+      recomputeOpenHeights();
+    }catch(err){
+      container.innerHTML='<div class="pdf-loading">Couldn\u2019t display inline \u2014 use the link below to open the PDF.</div>';
+      recomputeOpenHeights();
+    }
+  }
+
+  // hook into the accordion: render on first open
+  document.querySelectorAll('.sample').forEach(card=>{
+    const head=card.querySelector('.sample-head');
+    head.addEventListener('click',()=>{
+      if(card.classList.contains('open')){
+        const c=card.querySelector('.pdf-render');
+        if(c && !c.dataset.rendered){ setTimeout(()=>renderPdf(c),250); }
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
